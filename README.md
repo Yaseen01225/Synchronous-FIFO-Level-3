@@ -1,0 +1,1 @@
+Adds threshold flags and saturating counters for requests rejected because the FIFO is full or empty. Default parameters are for depth 8; change ADDR_WIDTH and COUNT_WIDTH consistently when changing DEPTH.

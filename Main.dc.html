@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Status FIFO poster</title>
+<script src="./vendor/react.js"></script>
+<script src="./vendor/react-dom.js"></script>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 1395px; height: 1875px; box-sizing: border-box; padding: 24px; background: #E8F0FA; display: flex; flex-direction: column; gap: 18px; font-family: 'Inter',sans-serif">
+
+<div style="display:flex;align-items:center;gap:28px;background:#0B2A5B;border-radius:20px;padding:22px 32px;color:#ffffff;">
+<div style="flex:none;width:104px;height:104px;box-sizing:border-box;border:3px solid #7FB8FF;border-radius:16px;background:#12408A;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+<div style="font-family:'Sora',sans-serif;font-weight:800;font-size:28px;line-height:1;">FIFO</div>
+<div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;color:#BFE3FF;margin-top:6px;">8 × 8</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+<div style="font-family:'Sora',sans-serif;font-weight:800;font-size:54px;line-height:1.05;">Status FIFO</div>
+<div style="font-family:'Sora',sans-serif;font-weight:600;font-size:23px;color:#BFE3FF;">Synchronous FIFO with almost flags and rejected-operation counters</div>
+<div style="display:flex;gap:10px;margin-top:4px;">
+<div style="padding:5px 14px;border-radius:999px;background:#12408A;border:2px solid #7FB8FF;font-weight:600;font-size:14px;">Single clock</div>
+<div style="padding:5px 14px;border-radius:999px;background:#12408A;border:2px solid #7FB8FF;font-weight:600;font-size:14px;">Almost-full and almost-empty flags</div>
+<div style="padding:5px 14px;border-radius:999px;background:#12408A;border:2px solid #7FB8FF;font-weight:600;font-size:14px;">Saturating reject counters</div>
+</div>
+</div>
+<div style="flex:none;display:flex;flex-direction:column;gap:8px;">
+<div style="padding:12px 26px;border-radius:14px;background:#12408A;border:3px solid #7FB8FF;text-align:center;font-family:'Sora',sans-serif;font-weight:800;font-size:26px;line-height:1.1;">Verilog<br>HDL</div>
+<div style="padding:6px 14px;border-radius:10px;background:#FFD34D;color:#3D2800;text-align:center;font-family:'Sora',sans-serif;font-weight:800;font-size:16px;">LEVEL 3</div>
+</div>
+</div>
+
+<div style="display:flex;gap:18px;align-items:stretch;">
+
+<div style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;background:#ffffff;border:2px solid #1F5FBF;border-radius:16px;overflow:hidden;box-sizing:border-box;">
+<div style="background:#1F5FBF;color:#ffffff;font-family:'Sora',sans-serif;font-weight:700;font-size:22px;padding:10px 16px;">Definition &amp; Purpose</div>
+<div style="padding:14px 16px;font-size:15px;line-height:1.45;color:#16263D;display:flex;flex-direction:column;gap:10px;flex:1;">
+<div>A synchronous FIFO is a First-In-First-Out buffer driven by a <b>single clock</b>. This version adds early-warning flags and counts every request it had to turn away.</div>
+<div style="display:flex;gap:10px;align-items:flex-start;"><div style="flex:none;width:22px;height:22px;border-radius:50%;background:#1E8449;color:#ffffff;font-size:14px;line-height:22px;text-align:center;font-weight:700;">✓</div><div>Almost-full and almost-empty thresholds</div></div>
+<div style="display:flex;gap:10px;align-items:flex-start;"><div style="flex:none;width:22px;height:22px;border-radius:50%;background:#1E8449;color:#ffffff;font-size:14px;line-height:22px;text-align:center;font-weight:700;">✓</div><div>Counts writes rejected when full and reads rejected when empty</div></div>
+<div style="display:flex;gap:10px;align-items:flex-start;"><div style="flex:none;width:22px;height:22px;border-radius:50%;background:#1E8449;color:#ffffff;font-size:14px;line-height:22px;text-align:center;font-weight:700;">✓</div><div>Parameterized width, depth and thresholds</div></div>
+</div>
+</div>
+
+<div style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;background:#ffffff;border:2px solid #1E8449;border-radius:16px;overflow:hidden;box-sizing:border-box;">
+<div style="background:#1E8449;color:#ffffff;font-family:'Sora',sans-serif;font-weight:700;font-size:22px;padding:10px 16px;">Parameters</div>
+<div style="padding:14px 16px;font-size:14px;color:#16263D;display:flex;flex-direction:column;gap:9px;flex:1;justify-content:center;">
+<div style="display:flex;align-items:baseline;gap:8px;"><span style="flex:none;width:160px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;">DATA_WIDTH</span><span style="flex:none;width:24px;font-weight:700;font-size:16px;">8</span><span style="color:#3A4A63;">bits per word</span></div>
+<div style="display:flex;align-items:baseline;gap:8px;"><span style="flex:none;width:160px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;">DEPTH</span><span style="flex:none;width:24px;font-weight:700;font-size:16px;">8</span><span style="color:#3A4A63;">words stored</span></div>
+<div style="display:flex;align-items:baseline;gap:8px;"><span style="flex:none;width:160px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;">ADDR_WIDTH</span><span style="flex:none;width:24px;font-weight:700;font-size:16px;">3</span><span style="color:#3A4A63;">log2 of 8</span></div>
+<div style="display:flex;align-items:baseline;gap:8px;"><span style="flex:none;width:160px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;">COUNT_WIDTH</span><span style="flex:none;width:24px;font-weight:700;font-size:16px;">4</span><span style="color:#3A4A63;">holds 0 to 8</span></div>
+<div style="display:flex;align-items:baseline;gap:8px;"><span style="flex:none;width:160px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;">ALMOST_FULL_LEVEL</span><span style="flex:none;width:24px;font-weight:700;font-size:16px;">6</span><span style="color:#3A4A63;">flag at count ≥ 6</span></div>
+<div style="display:flex;align-items:baseline;gap:8px;"><span style="flex:none;width:160px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;">ALMOST_EMPTY_LEVEL</span><span style="flex:none;width:24px;font-weight:700;font-size:16px;">2</span><span style="color:#3A4A63;">flag at count ≤ 2</span></div>
+<div style="display:flex;align-items:baseline;gap:8px;"><span style="flex:none;width:160px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;">ERROR_WIDTH</span><span style="flex:none;width:24px;font-weight:700;font-size:16px;">8</span><span style="color:#3A4A63;">counters stop at 255</span></div>
+</div>
+</div>
+
+<div style="flex:1.3 1 0;min-width:0;display:flex;flex-direction:column;background:#ffffff;border:2px solid #6A3FB5;border-radius:16px;overflow:hidden;box-sizing:border-box;">
+<div style="background:#6A3FB5;color:#ffffff;font-family:'Sora',sans-serif;font-weight:700;font-size:22px;padding:10px 16px;">Block Diagram</div>
+<div style="padding:14px 16px;color:#16263D;display:flex;flex-direction:column;gap:0;flex:1;justify-content:center;">
+<div style="display:flex;align-items:center;gap:6px;">
+<div style="flex:1;padding:12px 6px;border-radius:12px;border:2px solid #1F5FBF;background:#DCEBFF;color:#0F3B7A;text-align:center;"><div style="font-family:'Sora',sans-serif;font-weight:700;font-size:15px;">Write interface</div><div style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;margin-top:4px;">wr_en, data_in</div></div>
+<div style="flex:none;width:22px;text-align:center;font-size:22px;color:#3A4A63;" aria-hidden="true">→</div>
+<div style="flex:1;padding:12px 6px;border-radius:12px;border:2px solid #B34E00;background:#FFE4C7;color:#6E2F00;text-align:center;"><div style="font-family:'Sora',sans-serif;font-weight:700;font-size:15px;">FIFO memory</div><div style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;margin-top:4px;">8 words × 8 bits</div></div>
+<div style="flex:none;width:22px;text-align:center;font-size:22px;color:#3A4A63;" aria-hidden="true">→</div>
+<div style="flex:1;padding:12px 6px;border-radius:12px;border:2px solid #1E8449;background:#D9F2E1;color:#0F5128;text-align:center;"><div style="font-family:'Sora',sans-serif;font-weight:700;font-size:15px;">Read interface</div><div style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;margin-top:4px;">rd_en, data_out</div></div>
+</div>
+<div style="display:flex;align-items:center;gap:6px;height:30px;">
+<div style="flex:1;display:flex;justify-content:center;"><div style="width:3px;height:30px;background:#6A3FB5;"></div></div>
+<div style="flex:none;width:22px;"></div>
+<div style="flex:1;"></div>
+<div style="flex:none;width:22px;"></div>
+<div style="flex:1;display:flex;justify-content:center;"><div style="width:3px;height:30px;background:#6A3FB5;"></div></div>
+</div>
+<div style="padding:10px 12px;border-radius:12px;border:2px solid #C0392B;background:#FBDAD6;color:#7A1D13;text-align:center;"><div style="font-family:'Sora',sans-serif;font-weight:700;font-size:15px;">Status logic</div><div style="font-size:13px;font-weight:500;margin-top:3px;">count · full · empty · almost flags · rejected counters</div></div>
+</div>
+</div>
+
+</div>
+
+<div style="display:flex;gap:18px;align-items:stretch;">
+
+<div style="flex:1.5 1 0;min-width:0;display:flex;flex-direction:column;background:#ffffff;border:2px solid #0E7C86;border-radius:16px;overflow:hidden;box-sizing:border-box;">
+<div style="background:#0E7C86;color:#ffffff;font-family:'Sora',sans-serif;font-weight:700;font-size:22px;padding:10px 16px;">Internal Components</div>
+<div style="padding:14px 16px;color:#16263D;display:flex;flex-direction:column;gap:12px;flex:1;">
+<div style="display:flex;align-items:center;gap:8px;">
+<div style="flex:none;width:92px;display:flex;flex-direction:column;gap:8px;">
+<div style="padding:7px 8px;border-radius:8px;border:2px solid #1F5FBF;background:#DCEBFF;color:#0F3B7A;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;text-align:center;">wr_en</div>
+<div style="padding:7px 8px;border-radius:8px;border:2px solid #1F5FBF;background:#DCEBFF;color:#0F3B7A;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;text-align:center;">data_in</div>
+<div style="padding:7px 8px;border-radius:8px;border:2px solid #1F5FBF;background:#DCEBFF;color:#0F3B7A;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;text-align:center;">rd_en</div>
+</div>
+<div style="flex:none;font-size:22px;color:#3A4A63;" aria-hidden="true">→</div>
+<div style="flex:1;padding:30px 8px;border-radius:12px;border:2px solid #B34E00;background:#FFE4C7;color:#6E2F00;text-align:center;"><div style="font-family:'Sora',sans-serif;font-weight:700;font-size:18px;">FIFO memory</div><div style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;margin-top:4px;">8 × 8 bits</div></div>
+<div style="flex:none;font-size:22px;color:#3A4A63;" aria-hidden="true">→</div>
+<div style="flex:none;width:84px;padding:7px 8px;border-radius:8px;border:2px solid #1E8449;background:#D9F2E1;color:#0F5128;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;text-align:center;">data_out</div>
+</div>
+<div style="text-align:center;font-size:20px;line-height:1;color:#3A4A63;" aria-hidden="true">↑</div>
+<div style="display:flex;gap:10px;">
+<div style="flex:1;padding:10px 8px;border-radius:12px;border:2px solid #C0392B;background:#FBDAD6;color:#7A1D13;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;">wr_ptr, rd_ptr</div><div style="font-size:12px;font-weight:500;margin-top:3px;">address the memory</div></div>
+<div style="flex:1;padding:10px 8px;border-radius:12px;border:2px solid #6A3FB5;background:#E8DDFB;color:#3E1F7A;text-align:center;"><div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;">count</div><div style="font-size:12px;font-weight:500;margin-top:3px;">drives flags and counters</div></div>
+</div>
+<div style="font-size:13px;line-height:1.4;color:#3A4A63;">Reset clears both pointers, <b>count</b>, <b>data_out</b> and both reject counters. The memory array itself is not cleared.</div>
+</div>
+</div>
+
+<div style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;background:#ffffff;border:2px solid #B34E00;border-radius:16px;overflow:hidden;box-sizing:border-box;">
+<div style="background:#B34E00;color:#ffffff;font-family:'Sora',sans-serif;font-weight:700;font-size:22px;padding:10px 16px;">Write Flow</div>
+<div style="padding:14px 16px;color:#16263D;display:flex;flex-direction:column;gap:5px;flex:1;">
+<div style="padding:8px 10px;border-radius:10px;border:2px solid #1F5FBF;background:#DCEBFF;color:#0F3B7A;text-align:center;font-weight:600;font-size:14px;">wr_en = 1 ?</div>
+<div style="text-align:center;color:#3A4A63;font-size:16px;line-height:1;" aria-hidden="true">↓</div>
+<div style="padding:8px 10px;border-radius:10px;border:2px solid #1E8449;background:#D9F2E1;color:#0F5128;text-align:center;font-weight:600;font-size:14px;">full = 0 ?</div>
+<div style="text-align:center;color:#3A4A63;font-size:16px;line-height:1;" aria-hidden="true">↓</div>
+<div style="padding:8px 10px;border-radius:10px;border:2px solid #B34E00;background:#FFE4C7;color:#6E2F00;text-align:center;font-weight:600;font-size:13px;line-height:1.35;">memory[wr_ptr] ← data_in<br>wr_ptr + 1, wraps at 7</div>
+<div style="text-align:center;color:#3A4A63;font-size:16px;line-height:1;" aria-hidden="true">↓</div>
+<div style="padding:8px 10px;border-radius:10px;border:2px solid #6A3FB5;background:#E8DDFB;color:#3E1F7A;text-align:center;font-weight:600;font-size:14px;">count = count + 1</div>
+<div style="margin-top:6px;padding:8px 10px;border-radius:10px;border:2px dashed #C0392B;background:#FBDAD6;color:#7A1D13;text-align:center;font-weight:600;font-size:13px;line-height:1.35;">If full: rejected_writes + 1</div>
+</div>
+</div>
+
+<div style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;background:#ffffff;border:2px solid #6A3FB5;border-radius:16px;overflow:hidden;box-sizing:border-box;">
+<div style="background:#6A3FB5;color:#ffffff;font-family:'Sora',sans-serif;font-weight:700;font-size:22px;padding:10px 16px;">Read Flow</div>
+<div style="padding:14px 16px;color:#16263D;display:flex;flex-direction:column;gap:5px;flex:1;">
+<div style="padding:8px 10px;border-radius:10px;border:2px solid #1F5FBF;background:#DCEBFF;color:#0F3B7A;text-align:center;font-weight:600;font-size:14px;">rd_en = 1 ?</div>
+<div style="text-align:center;color:#3A4A63;font-size:16px;line-height:1;" aria-hidden="true">↓</div>
+<div style="padding:8px 10px;border-radius:10px;border:2px solid #1E8449;background:#D9F2E1;color:#0F5128;text-align:center;font-weight:600;font-size:14px;">empty = 0 ?</div>
+<div style="text-align:center;color:#3A4A63;font-size:16px;line-height:1;" aria-hidden="true">↓</div>
+<div style="padding:8px 10px;border-radius:10px;border:2px solid #B34E00;background:#FFE4C7;color:#6E2F00;text-align:center;font-weight:600;font-size:13px;line-height:1.35;">data_out ← memory[rd_ptr]<br>rd_ptr + 1, wraps at 7</div>
+<div style="text-align:center;color:#3A4A63;font-size:16px;line-height:1;" aria-hidden="true">↓</div>
+<div style="padding:8px 10px;border-radius:10px;border:2px solid #6A3FB5;background:#E8DDFB;color:#3E1F7A;text-align:center;font-weight:600;font-size:14px;">count = count − 1</div>
+<div style="margin-top:6px;padding:8px 10px;border-radius:10px;border:2px dashed #C0392B;background:#FBDAD6;color:#7A1D13;text-align:center;font-weight:600;font-size:13px;line-height:1.35;">If empty: rejected_reads + 1</div>
+</div>
+</div>
+
+<div style="flex:1.15 1 0;min-width:0;display:flex;flex-direction:column;gap:18px;">
+
+<div style="display:flex;flex-direction:column;background:#ffffff;border:2px solid #0E7C86;border-radius:16px;overflow:hidden;box-sizing:border-box;">
+<div style="background:#0E7C86;color:#ffffff;font-family:'Sora',sans-serif;font-weight:700;font-size:20px;padding:9px 16px;">Flag Logic</div>
+<div style="padding:12px 16px;color:#16263D;display:flex;flex-direction:column;gap:7px;">
+<div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#7A1D13;">full = (count == 8)</div>
+<div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#0F3B7A;">empty = (count == 0)</div>
+<div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#6E2F00;">almost_full = (count &gt;= 6)</div>
+<div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#3E1F7A;">almost_empty = (count &lt;= 2)</div>
+<div style="font-size:12px;line-height:1.35;color:#3A4A63;">Default parameters. Almost flags are also true when the FIFO is full or empty.</div>
+</div>
+</div>
+
+<div style="display:flex;flex-direction:column;background:#ffffff;border:2px solid #1F5FBF;border-radius:16px;overflow:hidden;box-sizing:border-box;flex:1;">
+<div style="background:#1F5FBF;color:#ffffff;font-family:'Sora',sans-serif;font-weight:700;font-size:20px;padding:9px 16px;">Count Update</div>
+<div style="padding:12px 16px;color:#16263D;display:flex;flex-direction:column;gap:6px;flex:1;justify-content:center;">
+<div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));border:1px solid #1F5FBF;border-radius:8px;overflow:hidden;font-size:13px;">
+<div style="padding:6px 10px;background:#DCEBFF;font-weight:700;color:#0F3B7A;">Accepted</div>
+<div style="padding:6px 10px;background:#DCEBFF;font-weight:700;color:#0F3B7A;">Count change</div>
+<div style="padding:6px 10px;border-top:1px solid #9DBDEB;">Write only</div>
+<div style="padding:6px 10px;border-top:1px solid #9DBDEB;font-weight:700;">+1</div>
+<div style="padding:6px 10px;border-top:1px solid #9DBDEB;">Read only</div>
+<div style="padding:6px 10px;border-top:1px solid #9DBDEB;font-weight:700;">−1</div>
+<div style="padding:6px 10px;border-top:1px solid #9DBDEB;">Both</div>
+<div style="padding:6px 10px;border-top:1px solid #9DBDEB;font-weight:700;">No change</div>
+<div style="padding:6px 10px;border-top:1px solid #9DBDEB;">Neither</div>
+<div style="padding:6px 10px;border-top:1px solid #9DBDEB;font-weight:700;">No change</div>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div style="display:flex;gap:18px;align-items:stretch;">
+
+<div style="flex:1.1 1 0;min-width:0;display:flex;flex-direction:column;background:#ffffff;border:2px solid #1E8449;border-radius:16px;overflow:hidden;box-sizing:border-box;">
+<div style="background:#1E8449;color:#ffffff;font-family:'Sora',sans-serif;font-weight:700;font-size:22px;padding:10px 16px;">Pointer Wraparound</div>
+<div style="padding:12px 16px;color:#16263D;display:flex;flex-direction:column;gap:8px;flex:1;">
+<div style="font-size:14px;line-height:1.4;">A pointer that reaches DEPTH − 1 (7) wraps back to 0, so 8 addresses are reused in a ring.</div>
+<div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;padding:6px 8px;border-radius:8px;background:#D9F2E1;color:#0F5128;">if (wr_ptr == DEPTH-1) wr_ptr &lt;= 0;</div>
+<div style="position:relative;width:210px;height:210px;margin:0 auto;">
+<div style="position:absolute;left:25px;top:25px;width:160px;height:160px;box-sizing:border-box;border:2px dashed #1E8449;border-radius:50%;"></div>
+<div style="position:absolute;left:55px;top:90px;width:100px;text-align:center;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;line-height:1.2;color:#0F5128;">DEPTH<br>= 8</div>
+<div style="position:absolute;left:88px;top:8px;width:34px;height:34px;border-radius:50%;background:#FFD34D;border:2px solid #8A5A00;color:#3D2800;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;">0</div>
+<div style="position:absolute;left:145px;top:31px;width:34px;height:34px;border-radius:50%;background:#FFD34D;border:2px solid #8A5A00;color:#3D2800;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;">1</div>
+<div style="position:absolute;left:168px;top:88px;width:34px;height:34px;border-radius:50%;background:#FFD34D;border:2px solid #8A5A00;color:#3D2800;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;">2</div>
+<div style="position:absolute;left:145px;top:145px;width:34px;height:34px;border-radius:50%;background:#FFD34D;border:2px solid #8A5A00;color:#3D2800;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;">3</div>
+<div style="position:absolute;left:88px;top:168px;width:34px;height:34px;border-radius:50%;background:#FFD34D;border:2px solid #8A5A00;color:#3D2800;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;">4</div>
+<div style="position:absolute;left:31px;top:145px;width:34px;height:34px;border-radius:50%;background:#FFD34D;border:2px solid #8A5A00;color:#3D2800;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;">5</div>
+<div style="position:absolute;left:8px;top:88px;width:34px;height:34px;border-radius:50%;background:#FFD34D;border:2px solid #8A5A00;color:#3D2800;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;">6</div>
+<div style="position:absolute;left:31px;top:31px;width:34px;height:34px;border-radius:50%;background:#FF9F40;border:2px solid #8A3D00;color:#3D1A00;font-family:'Sora',sans-serif;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;box-sizing:border-box;">7</div>
+</div>
+</div>
+</div>
+
+<div style="flex:2.3 1 0;min-width:0;display:flex;flex-direction:column;background:#ffffff;border:2px solid #0B2A5B;border-radius:16px;overflow:hidden;box-sizing:border-box;">
+<div style="background:#0B2A5B;color:#ffffff;font-family:'Sora',sans-serif;font-weight:700;font-size:22px;padding:10px 16px;">Testbench Timeline</div>
+<div style="padding:12px;flex:1;display:flex;">
+<div style="flex:1;background:#0D1B2A;border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:0;">
+
+<div style="display:flex;align-items:flex-end;margin-bottom:4px;">
+<div style="flex:none;width:130px;"></div>
+<div style="flex:1;padding:0 3px 6px;text-align:center;font-weight:600;font-size:12px;line-height:1.2;color:#DCEBFF;">Idle after reset</div>
+<div style="flex:1;padding:0 3px 6px;text-align:center;font-weight:600;font-size:12px;line-height:1.2;color:#DCEBFF;">8 writes</div>
+<div style="flex:1;padding:0 3px 6px;text-align:center;font-weight:600;font-size:12px;line-height:1.2;color:#DCEBFF;">Write when full</div>
+<div style="flex:1;padding:0 3px 6px;text-align:center;font-weight:600;font-size:12px;line-height:1.2;color:#DCEBFF;">8 reads</div>
+<div style="flex:1;padding:0 3px 6px;text-align:center;font-weight:600;font-size:12px;line-height:1.2;color:#DCEBFF;">Read when empty</div>
+</div>
+
+<div style="display:flex;align-items:center;height:30px;">
+<div style="flex:none;width:130px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#5CC8FF;">wr_en</div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div><div style="position:absolute;left:0%;width:100%;top:7px;bottom:7px;background:#5CC8FF;border-radius:3px;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div><div style="position:absolute;left:0%;width:100%;top:7px;bottom:7px;background:#5CC8FF;border-radius:3px;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div></div>
+</div>
+
+<div style="display:flex;align-items:center;height:30px;">
+<div style="flex:none;width:130px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#7CF29C;">rd_en</div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div><div style="position:absolute;left:0%;width:100%;top:7px;bottom:7px;background:#7CF29C;border-radius:3px;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div><div style="position:absolute;left:0%;width:100%;top:7px;bottom:7px;background:#7CF29C;border-radius:3px;"></div></div>
+</div>
+
+<div style="display:flex;align-items:center;height:30px;">
+<div style="flex:none;width:130px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#FFFFFF;">count</div>
+<div style="flex:1;height:30px;border-left:1px solid #2A4163;display:flex;align-items:center;justify-content:center;"><span style="background:#1B3A63;color:#ffffff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:2px 8px;border-radius:5px;">0</span></div>
+<div style="flex:1;height:30px;border-left:1px solid #2A4163;display:flex;align-items:center;justify-content:center;"><span style="background:#1B3A63;color:#ffffff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:2px 8px;border-radius:5px;">0 → 8</span></div>
+<div style="flex:1;height:30px;border-left:1px solid #2A4163;display:flex;align-items:center;justify-content:center;"><span style="background:#1B3A63;color:#ffffff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:2px 8px;border-radius:5px;">8</span></div>
+<div style="flex:1;height:30px;border-left:1px solid #2A4163;display:flex;align-items:center;justify-content:center;"><span style="background:#1B3A63;color:#ffffff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:2px 8px;border-radius:5px;">8 → 0</span></div>
+<div style="flex:1;height:30px;border-left:1px solid #2A4163;display:flex;align-items:center;justify-content:center;"><span style="background:#1B3A63;color:#ffffff;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:2px 8px;border-radius:5px;">0</span></div>
+</div>
+
+<div style="display:flex;align-items:center;height:30px;">
+<div style="flex:none;width:130px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#FF6B5E;">full</div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div><div style="position:absolute;left:88%;width:12%;top:7px;bottom:7px;background:#FF6B5E;border-radius:3px;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div><div style="position:absolute;left:0%;width:100%;top:7px;bottom:7px;background:#FF6B5E;border-radius:3px;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div><div style="position:absolute;left:0%;width:12%;top:7px;bottom:7px;background:#FF6B5E;border-radius:3px;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div></div>
+</div>
+
+<div style="display:flex;align-items:center;height:30px;">
+<div style="flex:none;width:130px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#FFB347;">almost_full</div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div><div style="position:absolute;left:75%;width:25%;top:7px;bottom:7px;background:#FFB347;border-radius:3px;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div><div style="position:absolute;left:0%;width:100%;top:7px;bottom:7px;background:#FFB347;border-radius:3px;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div><div style="position:absolute;left:0%;width:37%;top:7px;bottom:7px;background:#FFB347;border-radius:3px;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div></div>
+</div>
+
+<div style="display:flex;align-items:center;height:30px;">
+<div style="flex:none;width:130px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#C79BFF;">almost_empty</div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div><div style="position:absolute;left:0%;width:100%;top:7px;bottom:7px;background:#C79BFF;border-radius:3px;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div><div style="position:absolute;left:0%;width:37%;top:7px;bottom:7px;background:#C79BFF;border-radius:3px;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div><div style="position:absolute;left:75%;width:25%;top:7px;bottom:7px;background:#C79BFF;border-radius:3px;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div><div style="position:absolute;left:0%;width:100%;top:7px;bottom:7px;background:#C79BFF;border-radius:3px;"></div></div>
+</div>
+
+<div style="display:flex;align-items:center;height:30px;">
+<div style="flex:none;width:130px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#F7E15C;">empty</div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div><div style="position:absolute;left:0%;width:100%;top:7px;bottom:7px;background:#F7E15C;border-radius:3px;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div><div style="position:absolute;left:0%;width:12%;top:7px;bottom:7px;background:#F7E15C;border-radius:3px;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div><div style="position:absolute;left:88%;width:12%;top:7px;bottom:7px;background:#F7E15C;border-radius:3px;"></div></div>
+<div style="flex:1;position:relative;height:30px;border-left:1px solid #2A4163;"><div style="position:absolute;left:0;right:0;bottom:7px;height:2px;background:#33507A;"></div><div style="position:absolute;left:0%;width:100%;top:7px;bottom:7px;background:#F7E15C;border-radius:3px;"></div></div>
+</div>
+
+<div style="display:flex;align-items:center;height:30px;">
+<div style="flex:none;width:130px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#FFB3AA;">rejected_writes</div>
+<div style="flex:1;height:30px;border-left:1px solid #2A4163;display:flex;align-items:center;justify-content:center;"><span style="background:#4A1D1D;color:#FFB3AA;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:2px 8px;border-radius:5px;">0</span></div>
+<div style="flex:1;height:30px;border-left:1px solid #2A4163;display:flex;align-items:center;justify-content:center;"><span style="background:#4A1D1D;color:#FFB3AA;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:2px 8px;border-radius:5px;">0</span></div>
+<div style="flex:1;height:30px;border-left:1px solid #2A4163;display:flex;align-items:center;justify-content:center;"><span style="background:#4A1D1D;color:#FFB3AA;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:2px 8px;border-radius:5px;">0 → 1</span></div>
+<div style="flex:1;height:30px;border-left:1px solid #2A4163;display:flex;align-items:center;justify-content:center;"><span style="background:#4A1D1D;color:#FFB3AA;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:2px 8px;border-radius:5px;">1</span></div>
+<div style="flex:1;height:30px;border-left:1px solid #2A4163;display:flex;align-items:center;justify-content:center;"><span style="background:#4A1D1D;color:#FFB3AA;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:2px 8px;border-radius:5px;">1</span></div>
+</div>
+
+<div style="display:flex;align-items:center;height:30px;">
+<div style="flex:none;width:130px;font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:#9EE6FF;">rejected_reads</div>
+<div style="flex:1;height:30px;border-left:1px solid #2A4163;display:flex;align-items:center;justify-content:center;"><span style="background:#1B3A63;color:#9EE6FF;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:2px 8px;border-radius:5px;">0</span></div>
+<div style="flex:1;height:30px;border-left:1px solid #2A4163;display:flex;align-items:center;justify-content:center;"><span style="background:#1B3A63;color:#9EE6FF;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:2px 8px;border-radius:5px;">0</span></div>
+<div style="flex:1;height:30px;border-left:1px solid #2A4163;display:flex;align-items:center;justify-content:center;"><span style="background:#1B3A63;color:#9EE6FF;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:2px 8px;border-radius:5px;">0</span></div>
+<div style="flex:1;height:30px;border-left:1px solid #2A4163;display:flex;align-items:center;justify-content:center;"><span style="background:#1B3A63;color:#9EE6FF;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:2px 8px;border-radius:5px;">0</span></div>
+<div style="flex:1;height:30px;border-left:1px solid #2A4163;display:flex;align-items:center;justify-content:center;"><span style="background:#1B3A63;color:#9EE6FF;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;padding:2px 8px;border-radius:5px;">0 → 1</span></div>
+</div>
+
+<div style="margin-top:10px;font-size:12px;line-height:1.4;color:#A9C3E6;">Phases follow tb_status_fifo: 8 writes of data 0–7, one write of 0xEE while full, 8 reads, one read while empty. Bar positions are illustrative, not cycle-accurate.</div>
+
+</div>
+</div>
+</div>
+
+<div style="flex:1.1 1 0;min-width:0;display:flex;flex-direction:column;background:#ffffff;border:2px solid #0E7C86;border-radius:16px;overflow:hidden;box-sizing:border-box;">
+<div style="background:#0E7C86;color:#ffffff;font-family:'Sora',sans-serif;font-weight:700;font-size:22px;padding:10px 16px;">Code Flow</div>
+<div style="padding:12px 16px;color:#16263D;display:flex;flex-direction:column;gap:5px;flex:1;justify-content:center;">
+<div style="padding:7px 10px;border-radius:999px;border:2px solid #1F5FBF;background:#DCEBFF;color:#0F3B7A;text-align:center;font-weight:700;font-size:14px;">Start</div>
+<div style="text-align:center;color:#3A4A63;font-size:16px;line-height:1;" aria-hidden="true">↓</div>
+<div style="padding:7px 10px;border-radius:10px;border:2px solid #1E8449;background:#D9F2E1;color:#0F5128;text-align:center;font-weight:600;font-size:13px;line-height:1.3;">rst = 1: clear pointers, count, data_out, counters</div>
+<div style="text-align:center;color:#3A4A63;font-size:16px;line-height:1;" aria-hidden="true">↓</div>
+<div style="padding:7px 10px;border-radius:10px;border:2px solid #6A3FB5;background:#E8DDFB;color:#3E1F7A;text-align:center;font-weight:600;font-size:13px;line-height:1.3;">Check wr_en and rd_en against full / empty</div>
+<div style="text-align:center;color:#3A4A63;font-size:16px;line-height:1;" aria-hidden="true">↓</div>
+<div style="padding:7px 10px;border-radius:10px;border:2px solid #B34E00;background:#FFE4C7;color:#6E2F00;text-align:center;font-weight:600;font-size:13px;line-height:1.3;">Accepted: update memory, pointers and count</div>
+<div style="text-align:center;color:#3A4A63;font-size:16px;line-height:1;" aria-hidden="true">↓</div>
+<div style="padding:7px 10px;border-radius:10px;border:2px solid #C0392B;background:#FBDAD6;color:#7A1D13;text-align:center;font-weight:600;font-size:13px;line-height:1.3;">Rejected: bump reject counter (stops at 255)</div>
+<div style="text-align:center;color:#3A4A63;font-size:16px;line-height:1;" aria-hidden="true">↓</div>
+<div style="padding:7px 10px;border-radius:999px;border:2px solid #1F5FBF;background:#DCEBFF;color:#0F3B7A;text-align:center;font-weight:700;font-size:14px;">Flags follow count</div>
+</div>
+</div>
+
+</div>
+
+<div style="display:flex;gap:18px;align-items:stretch;flex:1;">
+
+<div style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;background:#ffffff;border:2px solid #1E8449;border-radius:16px;overflow:hidden;box-sizing:border-box;">
+<div style="background:#1E8449;color:#ffffff;font-family:'Sora',sans-serif;font-weight:700;font-size:22px;padding:10px 16px;">Verification</div>
+<div style="padding:14px 16px;font-size:14px;line-height:1.4;color:#16263D;display:flex;flex-direction:column;gap:9px;flex:1;">
+<div style="font-weight:600;">tb_status_fifo checks, in order:</div>
+<div style="display:flex;gap:10px;align-items:flex-start;"><div style="flex:none;width:22px;height:22px;border-radius:50%;background:#1E8449;color:#ffffff;font-size:14px;line-height:22px;text-align:center;font-weight:700;">✓</div><div>8 writes: full, almost_full, count = 8</div></div>
+<div style="display:flex;gap:10px;align-items:flex-start;"><div style="flex:none;width:22px;height:22px;border-radius:50%;background:#1E8449;color:#ffffff;font-size:14px;line-height:22px;text-align:center;font-weight:700;">✓</div><div>Extra write is counted in rejected_writes</div></div>
+<div style="display:flex;gap:10px;align-items:flex-start;"><div style="flex:none;width:22px;height:22px;border-radius:50%;background:#1E8449;color:#ffffff;font-size:14px;line-height:22px;text-align:center;font-weight:700;">✓</div><div>8 reads: empty and almost_empty are set</div></div>
+<div style="display:flex;gap:10px;align-items:flex-start;"><div style="flex:none;width:22px;height:22px;border-radius:50%;background:#1E8449;color:#ffffff;font-size:14px;line-height:22px;text-align:center;font-weight:700;">✓</div><div>Extra read is counted in rejected_reads</div></div>
+<div style="margin-top:auto;padding:10px;border-radius:12px;border:3px solid #1E8449;background:#D9F2E1;color:#0F5128;text-align:center;font-family:'Sora',sans-serif;font-weight:800;font-size:22px;">LEVEL 3 PASS</div>
+<div style="font-size:12px;color:#3A4A63;text-align:center;">Printed by the testbench when every check succeeds</div>
+</div>
+</div>
+
+<div style="flex:1.2 1 0;min-width:0;display:flex;flex-direction:column;background:#ffffff;border:2px solid #C0392B;border-radius:16px;overflow:hidden;box-sizing:border-box;">
+<div style="background:#C0392B;color:#ffffff;font-family:'Sora',sans-serif;font-weight:700;font-size:22px;padding:10px 16px;">Rejected-Operation Counters</div>
+<div style="padding:14px 16px;font-size:14px;line-height:1.4;color:#16263D;display:flex;flex-direction:column;gap:9px;flex:1;">
+<div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;padding:7px 9px;border-radius:8px;background:#FBDAD6;color:#7A1D13;line-height:1.5;">rejected_writes + 1 when<br>wr_en &amp;&amp; full &amp;&amp; !(rd_en &amp;&amp; !empty)</div>
+<div style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;padding:7px 9px;border-radius:8px;background:#DCEBFF;color:#0F3B7A;line-height:1.5;">rejected_reads + 1 when<br>rd_en &amp;&amp; empty &amp;&amp; !(wr_en &amp;&amp; !full)</div>
+<div style="display:flex;gap:10px;align-items:flex-start;"><div style="flex:none;width:22px;height:22px;border-radius:50%;background:#C0392B;color:#ffffff;font-size:14px;line-height:22px;text-align:center;font-weight:700;">1</div><div>A write is not counted if a read frees a slot in the same cycle, and the reverse for reads.</div></div>
+<div style="display:flex;gap:10px;align-items:flex-start;"><div style="flex:none;width:22px;height:22px;border-radius:50%;background:#C0392B;color:#ffffff;font-size:14px;line-height:22px;text-align:center;font-weight:700;">2</div><div>Saturating: at 8'hFF (255) a counter holds instead of wrapping to 0.</div></div>
+</div>
+</div>
+
+<div style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;background:#ffffff;border:2px solid #1F5FBF;border-radius:16px;overflow:hidden;box-sizing:border-box;">
+<div style="background:#1F5FBF;color:#ffffff;font-family:'Sora',sans-serif;font-weight:700;font-size:22px;padding:10px 16px;">Key Takeaways</div>
+<div style="padding:14px 16px;font-size:15px;line-height:1.4;color:#16263D;display:flex;flex-direction:column;gap:11px;flex:1;">
+<div style="display:flex;gap:10px;align-items:flex-start;"><div style="flex:none;width:22px;height:22px;border-radius:50%;background:#1E8449;color:#ffffff;font-size:14px;line-height:22px;text-align:center;font-weight:700;">✓</div><div>Almost flags warn at 6 and 2, before full or empty</div></div>
+<div style="display:flex;gap:10px;align-items:flex-start;"><div style="flex:none;width:22px;height:22px;border-radius:50%;background:#1E8449;color:#ffffff;font-size:14px;line-height:22px;text-align:center;font-weight:700;">✓</div><div>Rejected requests are counted, never silently lost</div></div>
+<div style="display:flex;gap:10px;align-items:flex-start;"><div style="flex:none;width:22px;height:22px;border-radius:50%;background:#1E8449;color:#ffffff;font-size:14px;line-height:22px;text-align:center;font-weight:700;">✓</div><div>Change DEPTH together with ADDR_WIDTH and COUNT_WIDTH</div></div>
+</div>
+</div>
+
+<div style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;background:#ffffff;border:2px solid #6A3FB5;border-radius:16px;overflow:hidden;box-sizing:border-box;">
+<div style="background:#6A3FB5;color:#ffffff;font-family:'Sora',sans-serif;font-weight:700;font-size:22px;padding:10px 16px;">Conclusion</div>
+<div style="padding:14px 16px;font-size:15px;line-height:1.5;color:#16263D;flex:1;">status_fifo extends a basic synchronous FIFO with threshold flags and saturating counters for rejected writes and reads. A controlling design can slow down early and see how many requests were turned away.</div>
+</div>
+
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1400,"height":1720}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
