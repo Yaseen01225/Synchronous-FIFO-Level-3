@@ -6,7 +6,7 @@ almost-full / almost-empty flags, a live occupancy count, and saturating counter
 | | |
 |---|---|
 | **Developer** | Ghulam Yaseen Nangraj |
-| **Date** | 01 November 2026 |
+| **Date** | 07 November 2026 |
 | **Design level** | Level 3 – FIFO with advanced status monitoring |
 | **Language** | Verilog HDL (IEEE 1364 / Verilog-2001) |
 | **Tools** | Xilinx Vivado 2025.2.1, Vivado Simulator (XSim) |
